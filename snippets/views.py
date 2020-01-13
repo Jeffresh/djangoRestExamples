@@ -216,11 +216,13 @@ from snippets.serializers import SnippetSerializer
 from snippets.serializers import UserSerializer
 
 from django.contrib.auth.models import User
+from rest_framework import permissions
 
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     # this method allows us to modify how the instance save is managed, and handle any information that
     # is implicit in the incoming request or requested URL.
@@ -233,6 +235,7 @@ class SnippetList(generics.ListCreateAPIView):
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class UserList(generics.ListAPIView):
