@@ -29,6 +29,8 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    # include the login and logout views for the browsable API
+    # you'll see a "Login" link in the top right of the page.
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('', include('snippets.urls'))
 ]
