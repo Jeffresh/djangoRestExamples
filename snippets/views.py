@@ -226,21 +226,21 @@ from rest_framework.reverse import reverse
 from rest_framework import renderers
 
 
-class SnippetHighlight(generics.GenericAPIView):
-    queryset = Snippet.objects.all()
-    renderer_classes = [renderers.StaticHTMLRenderer]
-
-    def get(self, request, *args, **kwargs):
-        snippet = self.get_object()
-        return Response(snippet.highlighted)
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format),
-    })
+# class SnippetHighlight(generics.GenericAPIView):
+#     queryset = Snippet.objects.all()
+#     renderer_classes = [renderers.StaticHTMLRenderer]
+#
+#     def get(self, request, *args, **kwargs):
+#         snippet = self.get_object()
+#         return Response(snippet.highlighted)
+#
+#
+# @api_view(['GET'])
+# def api_root(request, format=None):
+#     return Response({
+#         'users': reverse('user-list', request=request, format=format),
+#         'snippets': reverse('snippet-list', request=request, format=format),
+#     })
 
 
 # class SnippetList(generics.ListCreateAPIView):
@@ -280,6 +280,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.decorators import action
 
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides 'list' and 'detail' actions
@@ -299,14 +300,15 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
     # add any custom endpoints that don't fit into the standard create/update/delete style.
     # @action decorator will respond to GET request by default. We can use the methods argument
     # if we wanted an action that responded to /PUT/DELETE/POST request.
     # the urls for custom actions by default depend on the method name itself. If you want to change the
     # way url should be constructed, you can include url_path as a decorator keyword argument.
-    @action(detail=True, renderer_classes=renderers.StaticHTMLRenderer)
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
         snippet = self.get_object()
         return Response(snippet.highlighted)
