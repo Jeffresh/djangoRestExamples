@@ -210,10 +210,12 @@
 #         return self.destroy(request, *args, **kwargs)
 
 # refactored generic class-based
-
+from rest_framework import generics
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
-from rest_framework import generics
+from snippets.serializers import UserSerializer
+
+from django.contrib.auth.models import User
 
 
 class SnippetList(generics.ListCreateAPIView):
@@ -226,7 +228,13 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SnippetSerializer
 
 
+class UserList(generics.ListAPIView):
+    query = User.objects.all()
+    serializer_class = UserSerializer
 
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 
