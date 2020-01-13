@@ -72,9 +72,9 @@ from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 # refactored using HyperlinkingModelSerializer
 
 class SnippetSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    # owner = serializers.HyperlinkedIdentityField(view_name='user-detail', read_only=True)
+    owner = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True)
     highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
+
 
     class Meta:
         model = Snippet
