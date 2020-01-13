@@ -219,6 +219,13 @@ from django.contrib.auth.models import User
 from rest_framework import permissions
 from snippets.permissions import IsOwnerOrReadOnly
 
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'snippets': reverse('snippet-list', request=request, format=format),
+    })
+
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
