@@ -239,7 +239,7 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserList(generics.ListAPIView):
-    query = User.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
