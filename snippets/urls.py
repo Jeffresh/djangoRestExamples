@@ -18,6 +18,7 @@ urlpatterns = [
     path('users/<int:pk>/', views.UserDetail.as_view()),
 
     path('', views.api_root),
+    path('snippets/<int:pk>/highlight/', views.SnippetHighlight.as_view())
 ]
 
 
