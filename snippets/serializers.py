@@ -40,9 +40,22 @@ from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 # refactoring using modelserializer
 
 class SnippetSerializer(serializers.ModelSerializer):
+    # now that snippet are associated with the user that created them, let's update our SnippetSerializer
+    # to reflect that.
+
+    # source  argument controls which attribute is used to populate a field, and can point at any attribute
+    # on the serialized instance. It can also take the dotted notation shown above, in which ase it will
+    # traverse the give attributes, in a similar way as it is used with Django's template language.
+
+    # the untyped ReadOnlyField class, is always read-only, and will be used for serialized representations,
+    # will not be used for updating model instances when they are deserialized.
+    # we could have also used CharField(read_only=True)
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Snippet
-        fields = ['id', 'title', 'code', 'linenos', 'language', 'style']
+        # and make sure you also add 'owner', to the list of fields in the inner Meta class.
+        fields = ['id', 'title', 'code', 'linenos', 'language', 'style', 'owner']
 
 
 # got some users to work with, we'd better add representations of those users to our API.
