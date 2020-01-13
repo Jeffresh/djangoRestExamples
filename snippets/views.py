@@ -222,6 +222,13 @@ class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
 
+    # this method allows us to modify how the instance save is managed, and handle any information that
+    # is implicit in the incoming request or requested URL.
+    def perform_create(self, serializer):
+        # the create() method of our serializer will now be passed an additional 'owner' field, along with
+        # the validate data from the request.
+        serializer.save(owner=self.request.user)
+
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
