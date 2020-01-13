@@ -243,36 +243,79 @@ def api_root(request, format=None):
     })
 
 
+# class SnippetList(generics.ListCreateAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#     # required permissions to views
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+#
+#     # this method allows us to modify how the instance save is managed, and handle any information that
+#     # is implicit in the incoming request or requested URL.
+#     def perform_create(self, serializer):
+#         # the create() method of our serializer will now be passed an additional 'owner' field, along with
+#         # the validate data from the request.
+#         serializer.save(owner=self.request.user)
+#
+#
+# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#     # required permissions to views
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+#
+#
+# class UserList(generics.ListAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#
+#
+# class UserDetail(generics.RetrieveAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
-class SnippetList(generics.ListCreateAPIView):
+# refactored using viewSet.
+
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import viewsets
+from rest_framework.decorators import action
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides 'list' and 'detail' actions
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class SnippetViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides 'list', 'create', 'retrieve',
+    'update', and 'destroy' actions.
+
+    Additionally we also provide an extra 'highlight' action.
+
+    """
+
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    # required permissions to views
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-    # this method allows us to modify how the instance save is managed, and handle any information that
-    # is implicit in the incoming request or requested URL.
+    # add any custom endpoints that don't fit into the standard create/update/delete style.
+    # @action decorator will respond to GET request by default. We can use the methods argument
+    # if we wanted an action that responded to /PUT/DELETE/POST request.
+    # the urls for custom actions by default depend on the method name itself. If you want to change the
+    # way url should be constructed, you can include url_path as a decorator keyword argument.
+    @action(detail=True, renderer_classes=renderers.StaticHTMLRenderer)
+    def highlight(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
+
     def perform_create(self, serializer):
-        # the create() method of our serializer will now be passed an additional 'owner' field, along with
-        # the validate data from the request.
         serializer.save(owner=self.request.user)
 
 
-class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-    # required permissions to views
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 
 
