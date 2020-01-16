@@ -4,7 +4,12 @@
     <h1> SNIPPETS</h1>
 
     {% for snippet in snippets %}
-        {{ snippet }}
+        <div>
+            <p><b>User:</b>{{ snippet.user }}</p>
+            <p><b>Title:</b>{{ snippet.title| linebreaksbr }}</p>
+
+            <p><b>Code:</b>{{ snippet.code| linebreaksbr }}</p>
+        </div>
     {% endfor %}
 {% endblock content %}
 
