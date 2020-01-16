@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> SNIPPETS</h1>
+
+    {% for snippet in snippets %}
+        {{ snippet }}
+    {% endfor %}
+{% endblock content %}
+
