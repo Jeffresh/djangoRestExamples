@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-#Object level permissions, custom permissions.
+# Object level permissions, custom permissions.
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
