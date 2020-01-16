@@ -5,6 +5,8 @@
 # from snippets.models import Snippet
 # from snippets.serializers import SnippetSerializer
 
+# dont use this file, only for learning purposes.
+
 
 # @csrf_exempt
 # def snippet_list(request):
