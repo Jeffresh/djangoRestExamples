@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+from snippets.models.snippet import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 
+# dont use this file, only learning purposes.
 
 # class SnippetSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)

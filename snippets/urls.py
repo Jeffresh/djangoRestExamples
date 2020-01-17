@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from snippets import views
+# from snippets import views
 # from snippets.views import SnippetViewSet, UserViewSet, api_root
 from rest_framework import renderers
 
@@ -21,12 +21,19 @@ from rest_framework.routers import DefaultRouter
 
 # Create a router and register our viewsets with it.
 
-router = DefaultRouter()
-router.register(r'snippets', views.SnippetViewSet)
-router.register(r'users', views.UserViewSet)
+# router = DefaultRouter()
+# router.register(r'snippets', views.SnippetViewSet)
+# router.register(r'users', views.UserViewSet)
+
+from snippets.api.urls import router
+from snippets.views.home import Home
+from snippets.views.snippets import SnippetList
+
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', Home.as_view(), name='home'),
+    path('api/', include(router.urls)),
+    path('snippets/', SnippetList.as_view(), name='snippetList')
 ]
 
 

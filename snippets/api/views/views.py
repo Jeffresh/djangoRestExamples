@@ -5,6 +5,8 @@
 # from snippets.models import Snippet
 # from snippets.serializers import SnippetSerializer
 
+# dont use this file, only for learning purposes.
+
 
 # @csrf_exempt
 # def snippet_list(request):
@@ -211,9 +213,9 @@
 
 # refactored generic class-based
 from rest_framework import generics
-from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer
-from snippets.serializers import UserSerializer
+from snippets.models.snippet import Snippet
+from snippets.api.serializers.snippet import SnippetSerializer
+from snippets.api.serializers.user import UserSerializer
 
 from django.contrib.auth.models import User
 from rest_framework import permissions
