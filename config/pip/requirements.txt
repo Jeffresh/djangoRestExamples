@@ -9,7 +9,7 @@ Click==7.0
 colorama==0.4.3
 cymem==2.0.3
 Django==3.1.8
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 docutils==0.16
 fast-bert==1.6.2
 fastprogress==0.2.2
