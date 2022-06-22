@@ -20,7 +20,7 @@ jmespath==0.9.4
 joblib==0.14.1
 more-itertools==8.1.0
 murmurhash==1.0.2
-numpy==1.21.0
+numpy==1.22.0
 pandas==0.25.3
 Pillow==9.0.1
 plac==1.1.3
