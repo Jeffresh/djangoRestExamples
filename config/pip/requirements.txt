@@ -39,7 +39,7 @@ ruamel.yaml.clib==0.2.0
 s3transfer==0.3.0
 sacremoses==0.0.38
 scikit-learn==0.22.1
-scipy==1.4.1
+scipy==1.10.0
 sentencepiece==0.1.85
 six==1.13.0
 sklearn==0.0
