@@ -52,7 +52,7 @@ tokenizers==0.1.1
 toml==0.10.0
 torch==1.13.1
 torchvision==0.4.2
-tqdm==4.41.1
+tqdm==4.66.3
 transformers==4.38.0
 urllib3==1.26.18
 wasabi==0.6.0
