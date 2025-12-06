@@ -54,6 +54,6 @@ torch==2.8.0
 torchvision==0.4.2
 tqdm==4.66.3
 transformers==4.53.0
-urllib3==2.5.0
+urllib3==2.6.0
 wasabi==0.6.0
 zipp==3.19.1
