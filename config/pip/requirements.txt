@@ -40,7 +40,7 @@ s3transfer==0.3.0
 sacremoses==0.0.38
 scikit-learn==1.5.0
 scipy==1.10.0
-sentencepiece==0.1.85
+sentencepiece==0.2.1
 six==1.13.0
 sklearn==0.0
 spacy==2.2.3
